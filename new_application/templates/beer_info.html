@@ -1,0 +1,36 @@
+{{ current_time.now().strftime("%A, %B %d %H:%M %p") }}
+
+<ul>
+    {% if data != 'NULL' %}
+    	{% for r in data %}
+        	<h1> {{ r['name'] }} </h1>
+	        <div> 
+	        	{% if r['abv'] %}
+	        		<h3> ABV: {{ r['abv'] }} </h3>
+	        	{% endif %}
+
+	        	{% if r['servingTemperatureDisplay'] %}
+	        		<h3> Serving Temperature: {{r['servingTemperatureDisplay']}} </h3>
+	        	{% endif %}
+
+	        	{% if r['description'] %}
+	        		<h2> Description: {{ r['description'] }}"</h2>
+	        	{% endif %}
+
+	        	{% if r['style']['name'] and r['style']['description'] %}
+	        		<h3><i>Style: {{r['style']['name']}} - {{r['style']['description']}} </i></h3>
+	        	{% endif %}
+	        </div>
+	    {% endfor %}
+	{% else %}
+
+		{% if current_time.now().time() < today5pm %}
+			<h2> It's not even 5 o'clock and you typed "{{ name }}". Slow down on the beers and try again! </h2>
+		{% else %}
+			<h2> It's past 5 o'clock. What are you doing searching for "{{ name }}"? Grab a beer try again! </h2>
+		{% endif %}
+
+  {% endif %}
+  <h2><a href="http://localhost:5000/search">Search for a different beer!</a></h2>
+
+</ul>
