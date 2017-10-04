@@ -28,7 +28,6 @@ def seach_beers():
 
 @app.route('/beerinfo', methods= ['POST','GET'])
 def beerinfo():
-	print("BEERS")
 	base_url = "http://api.brewerydb.com/v2/beers"
 	params = {}
 	if request.method == 'GET':
@@ -36,9 +35,7 @@ def beerinfo():
 		name = result.get('beer')
 		params['name'] = name
 		params['key'] = '01d35c18b7ed7936d4e01e7cb83eb0ee'
-		print("NAME: ", name)
 		r = requests.get(base_url, params= params).json()
-		print(r)
 		if 'data' in r.keys():
 			data = r['data']
 		else:
